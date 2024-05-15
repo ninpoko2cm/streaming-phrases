@@ -1,17 +1,20 @@
 #!/bin/sh
 
-[ $# -ne 1 ] && echo "Ussage $(basename $0) SRTFILE" && exit 1
+SELF=`realpath ${BASH_SOURCE:-$0}`
+SELF_DIR=`dirname ${SELF}`/../
+APP_DIR=`realpath ${SELF_DIR}`
+# workdir
+WORK_DIR=`realpath ${SELF_DIR}src/srt/`
+SAVE_DIR=`realpath ${SELF_DIR}src/txt/`
 
-# if arg $1 not file
-[ ! -f "$1" ] && echo "File $1 doesn't exists." && exit 1
+# delete
+rm -rf ${SAVE_DIR}
+# copy
+cp -R ${WORK_DIR} ${SAVE_DIR}
+# rename
+find ${SAVE_DIR} -maxdepth 3 -type f -name '*.srt' | xargs -L 1 rename 's/.srt/.txt/;'
 
-
-sed -r -e 's/^\xef\xbb\xbf//' \
-    -e 's/\r//' \
-    -e 's/^[0-9]*$//' \
-    -e '/^[0-9]{2}:[0-9]{2}:[0-9]{2},[0-9]{3} --> [0-9]{2}:[0-9]{2}:[0-9]{2},[0-9]{3}$/d' \
-    -e '/^[0-9]+\.[0-9]+ --> [0-9]+\.[0-9]+$/d' \
-    -e 's/^\s*$//' \
-    -e '/^$/d;s/<[^>]*>//g' "$1"
+# replace(srt to txt)
+find ${SAVE_DIR} -maxdepth 3 -type f -name '*.txt' -print0 | xargs -0 -L 1 sed -i -e 's/^\xef\xbb\xbf//; s/\r//; s/^[0-9]*$//; /^[0-9]{2}:[0-9]{2}:[0-9]{2},[0-9]{3} --> [0-9]{2}:[0-9]{2}:[0-9]{2},[0-9]{3}$/d; /[0-9] --> [0-9]/d; s/^\s*$//; /^$/d;s/<[^>]*>//g'
 
 exit 0
