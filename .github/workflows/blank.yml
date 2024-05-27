@@ -17,14 +17,15 @@ jobs:
         TZ: 'Asia/Tokyo'
       run: echo "CURRENT_DATETIME=$(date +'%Y%m%d-%H%M%S')" >> $GITHUB_ENV
     
-    - run: echo "RELEASE_FILENAME=release_${{ env.CURRENT_DATETIME }}.zip" >> $GITHUB_ENV
+    #- run: echo "RELEASE_FILENAME=release_${{ env.CURRENT_DATETIME }}.zip" >> $GITHUB_ENV
+    - run: echo "RELEASE_FILENAME=release_txt.zip" >> $GITHUB_ENV
       
     - name: Archive Release(txt)
       uses: thedoctor0/zip-release@main
       with:
         type: 'zip'
         directory: './src/txt'
-        filename: 'txt'
+        filename: ${{ env.RELEASE_FILENAME }}
         exclusions: '*.git*'
       
     - name: Create Release
