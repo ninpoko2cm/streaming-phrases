@@ -23,7 +23,7 @@ jobs:
       uses: thedoctor0/zip-release@main
       with:
         type: 'zip'
-        directory: '/src/txt'
+        directory: './src/txt'
         filename: 'txt'
         exclusions: '*.git*'
       
