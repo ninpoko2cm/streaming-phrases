@@ -25,7 +25,6 @@ jobs:
         type: 'zip'
         filename: ${{ env.RELEASE_FILENAME }}
         path: ./src/
-        directory: ./src/
         exclusions: '*.git*'
       
     - name: Create Release
