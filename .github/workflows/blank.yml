@@ -19,11 +19,12 @@ jobs:
     
     - run: echo "RELEASE_FILENAME=release_${{ env.CURRENT_DATETIME }}.zip" >> $GITHUB_ENV
       
-    - name: Archive Release
+    - name: Archive Release(txt)
       uses: thedoctor0/zip-release@main
       with:
         type: 'zip'
-        filename: ${{ env.RELEASE_FILENAME }}
+        directory: '/src/txt'
+        filename: 'txt'
         exclusions: '*.git*'
       
     - name: Create Release
