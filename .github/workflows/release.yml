@@ -33,7 +33,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ env.CURRENT_DATETIME }}
+        tag_name: latest
         name: latest
         draft: false
         prerelease: false
