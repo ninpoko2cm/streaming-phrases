@@ -1,9 +1,9 @@
 Dialogue extraction from the live broadcast of Ninpo.
 
-# File
+# path
 
 `src/[file format]/[webpage domain]/[webpage_id].[ext]`
 
-# Download
+# download
 
 - [latest/release.zip](https://github.com/ninpoko2cm/streaming-phrases/releases/download/latest/release.zip) (srt, txt)
